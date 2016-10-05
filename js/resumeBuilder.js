@@ -15,7 +15,8 @@ var skills = ["SharePoint", "Team Foundation Server", "SalesForce",
 
 var overview = "Innovative and experienced project/program manager with a record of " +
     "developing and supporting successful solutions incorporating a wide " +
-    "range of applications and technologies.";
+    "range of applications and technologies.  Currently looking for a new role while "+
+    "learning new development skills that led to the creation of this site.";
 
 var bio = {
     // creating a object holding multiple variables
@@ -24,8 +25,8 @@ var bio = {
     "contacts": {
         "phone": "404-290-2231",
         "email": "ryanostolski@gmail.com",
-        "github": "none",
-        "address": "Atlanta, GA 30319"
+        "github": "rostolski",
+        "location": "Atlanta, GA 30319"
     },
     "overview": overview,
     "skills": topSkills,
@@ -56,9 +57,10 @@ bio.display = function() {
 
   var formattedPhone = HTMLmobile.replace("%data%", bio.contacts.phone);
   var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-  var formattedAddress = HTMLlocation.replace("%data%", bio.contacts.address);
+  var formattedAddress = HTMLlocation.replace("%data%", bio.contacts.location);
+  var formattedGitHub = HTMLgithub.replace("%data%", bio.contacts.github);
 
-  $("#topContacts").append(formattedPhone, formattedEmail, formattedAddress);
+  $("#topContacts").append(formattedPhone, formattedEmail, formattedAddress, formattedGitHub);
 };
 
 bio.display();
@@ -163,6 +165,7 @@ var work = {
             "offsite contractors in Canada and India. Developed database to track and plan the allocation of resources."
     }]
 };
+
 
 work.display = function() {
 
@@ -297,7 +300,7 @@ projects.display = function() {
 projects.display();
 
 
-
+$("main").append(internationalizeButton);
 
 $("#mapDiv").append(googleMap);
 
