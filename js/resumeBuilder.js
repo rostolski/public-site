@@ -216,9 +216,15 @@ var education = {
     "onlineCourses": [{
         "title": "Intro to Programming NanoDegree",
         "school": "Udacity",
-        "dates": "2016",
+        "dates": "Finished October 2016",
         "url": "https://www.udacity.com/course/intro-to-programming-nanodegree--nd000"
-    }]
+    }, {
+        "title": "Full Stack Web Developer NanoDegree - In Progress",
+        "school": "Udacity",
+        "dates": "Started October 2016",
+        "url": "https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004"
+    }
+  ]
 };
 
 
@@ -245,7 +251,7 @@ education.display = function(){
       var formattedCertificationDates = HTMLonlineDates.replace("%data%", certification.dates);
       $(".education-entry:last").append(formattedCertificationTitle, formattedCertificationOrg, formattedCertificationDates);
   });
-  
+
   $("#education").append(HTMLonlineClasses);
   education.onlineCourses.forEach(function(online) {
       $("#education").append(HTMLschoolStart);
