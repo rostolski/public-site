@@ -32,33 +32,36 @@ var bio = {
     "bioPic": "files/fry.jpg"
 };
 
-var formattedWelcome = HTMLwelcomeMsg.replace("%data%", bio.overview);
-$("#header").append(formattedWelcome);
+bio.display = function() {
+  var formattedWelcome = HTMLwelcomeMsg.replace("%data%", bio.overview);
+  $("#header").append(formattedWelcome);
+
+  if (bio.skills.length > 0) {
+      $("#header").append(HTMLskillsStart);
+      var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
+      //sets up the skills section and appends the first skill to the page
+      $("#header").append(formattedSkill);
+      for (i = 1; i < bio.skills.length; i++) {
+          //adds the remaining skills to the page
+          formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
+          $("#header").append(formattedSkill);
+      }
+  }
+
+  var formattedName = HTMLheaderName.replace("%data%", bio.name);
+  var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+  var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
+  $("#header").prepend(formattedName, formattedRole, formattedBioPic);
 
 
-if (bio.skills.length > 0) {
-    $("#header").append(HTMLskillsStart);
-    var formattedSkill = HTMLskills.replace("%data%", bio.skills[0]);
-    //sets up the skills section and appends the first skill to the page
-    $("#header").append(formattedSkill);
-    for (i = 1; i < bio.skills.length; i++) {
-        //adds the remaining skills to the page
-        formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
-        $("#header").append(formattedSkill);
-    }
-}
+  var formattedPhone = HTMLmobile.replace("%data%", bio.contacts.phone);
+  var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
+  var formattedAddress = HTMLlocation.replace("%data%", bio.contacts.address);
 
-var formattedName = HTMLheaderName.replace("%data%", bio.name);
-var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
-$("#header").prepend(formattedName, formattedRole, formattedBioPic);
+  $("#topContacts").append(formattedPhone, formattedEmail, formattedAddress);
+};
 
-
-var formattedPhone = HTMLmobile.replace("%data%", bio.contacts.phone);
-var formattedEmail = HTMLemail.replace("%data%", bio.contacts.email);
-var formattedAddress = HTMLlocation.replace("%data%", bio.contacts.address);
-
-$("#topContacts").append(formattedPhone, formattedEmail, formattedAddress);
+bio.display();
 
 
 var work = {
@@ -100,6 +103,7 @@ var work = {
 
     }, {
         "employer": "Rideout",
+        "url" : "http://www.ryanostolski.com/index.html",
         "title": "Co-Founder",
         "dates": "Jan 2014 - July 2014",
         "location": "Atlanta, GA",
@@ -160,30 +164,26 @@ var work = {
     }]
 };
 
+work.display = function() {
 
-work.jobs.forEach(function(job) {
-    $("#workExperience").append(HTMLworkStart);
-    var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", job.employer);
-    //var formattedWorkUrl = HTMLworkEmployer.replace("%url%", job.url);
-    //couldnt figure out how to get this to work, so changed the url back to # in helper.js
-    var formattedWorkDates = HTMLworkDates.replace("%data%", job.dates);
-    // Trying to get formattedWorkDates on the same line as formattedWorkEmployer - couldnt get that to work
-    var formattedWorkTitle = HTMLworkTitle.replace("%data%", job.title);
-    var formattedWorkLocation = HTMLworkLocation.replace("%data%", job.location);
-    var formattedWorkDescription = HTMLworkDescription.replace("%data%", job.description);
-    var formattedMap = googleMap.replace("map", job.location);
-    $(".map:last").append(formattedMap);
-    $(".work-entry:last").append(formattedWorkEmployer, formattedWorkDates, formattedWorkTitle, formattedWorkLocation, formattedWorkDescription);
-});
+  work.jobs.forEach(function(job) {
+      $("#workExperience").append(HTMLworkStart);
+      var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", job.employer).replace("#", job.url);
+      //var formattedWorkUrl = HTMLworkEmployer.replace("%url%", job.url);
+      //couldnt figure out how to get this to work, so changed the url back to # in helper.js
+      var formattedWorkDates = HTMLworkDates.replace("%data%", job.dates);
+      // Trying to get formattedWorkDates on the same line as formattedWorkEmployer - couldnt get that to work
+      var formattedWorkTitle = HTMLworkTitle.replace("%data%", job.title);
+      var formattedWorkLocation = HTMLworkLocation.replace("%data%", job.location);
+      var formattedWorkDescription = HTMLworkDescription.replace("%data%", job.description);
+      var formattedMap = googleMap.replace("map", job.location);
+      $(".map:last").append(formattedMap);
+      $(".work-entry:last").append(formattedWorkEmployer, formattedWorkDates, formattedWorkTitle, formattedWorkLocation, formattedWorkDescription);
+  });
 
+};
 
-
-$(document).click(function(loc) {
-    var x = loc.pageX;
-    var y = loc.pageY;
-
-    logClicks(x, y);
-});
+work.display();
 
 var education = {
     "schools": [{
@@ -220,6 +220,44 @@ var education = {
     }]
 };
 
+
+education.display = function(){
+
+  education.schools.forEach(function(school) {
+      $("#education").append(HTMLschoolStart);
+      var formattedSchoolName = HTMLschoolName.replace("%data%", school.name).replace("#", school.url);
+      //var formattedSchoolUrl = HTMLschoolName.replace("%url%", education.schools[school].url);
+      //couldnt figure out how to get this to work, so changed the url back to # in helper.js
+      var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
+      // Trying to get formattedWorkDates on the same line as formattedWorkEmployer - couldnt get that to work
+      var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
+      var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
+      var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", school.majors);
+
+      $(".education-entry:last").append(formattedSchoolName, formattedSchoolDegree, formattedSchoolDates, formattedSchoolLocation, formattedSchoolMajor);
+  });
+
+  $("#education").append(HTMLcertifications);
+  education.certifications.forEach(function(certification) {
+      $("#education").append(HTMLschoolStart);
+      var formattedCertificationTitle = HTMLonlineTitle.replace("%data%", certification.title).replace("#", certification.documentation);
+      var formattedCertificationOrg = HTMLonlineSchool.replace("%data%", certification.organization);
+      var formattedCertificationDates = HTMLonlineDates.replace("%data%", certification.dates);
+      $(".education-entry:last").append(formattedCertificationTitle, formattedCertificationOrg, formattedCertificationDates);
+  });
+
+  $("#education").append(HTMLonlineClasses);
+  education.onlineCourses.forEach(function(online) {
+      $("#education").append(HTMLschoolStart);
+      var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", online.title).replace("#", online.url);
+      var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", online.school);
+      var formattedOnlineDates = HTMLonlineDates.replace("%data%", online.dates);
+      $(".education-entry:last").append(formattedOnlineTitle, formattedOnlineSchool, formattedOnlineDates);
+  });
+};
+
+education.display();
+
 var images = ["files/Fresh-Tomatoes-Site.jpg", "files/Movie-Code.jpg"];
 
 var projects = {
@@ -230,54 +268,43 @@ var projects = {
             "utilizing Python lessons learned to create a website that will load multiple " +
             "movie wallpaper images.  Upon clicking on an image a trailer will play for that " +
             "movie.",
-        "images": images
+        "images": images,
+        "fileLink" : "movie_website/fresh_tomatoes.html"
     }]
 };
 
-education.schools.forEach(function(school) {
-    $("#education").append(HTMLschoolStart);
-    var formattedSchoolName = HTMLschoolName.replace("%data%", school.name);
-    //var formattedSchoolUrl = HTMLschoolName.replace("%url%", education.schools[school].url);
-    //couldnt figure out how to get this to work, so changed the url back to # in helper.js
-    var formattedSchoolDegree = HTMLschoolDegree.replace("%data%", school.degree);
-    // Trying to get formattedWorkDates on the same line as formattedWorkEmployer - couldnt get that to work
-    var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
-    var formattedSchoolLocation = HTMLschoolLocation.replace("%data%", school.location);
-    var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", school.majors);
+projects.display = function() {
 
-    $(".education-entry:last").append(formattedSchoolName, formattedSchoolDegree, formattedSchoolDates, formattedSchoolLocation, formattedSchoolMajor);
-});
+  projects.IntroProgramming.forEach(function(project) {
+      $("#projects").append(HTMLprojectStart);
+      var formattedProjectTitle = HTMLprojectTitle.replace("%data%", project.title).replace("#", project.fileLink);
+      var formattedProjectDates = HTMLprojectDates.replace("%data%", project.dates);
+      var formattedProjectDesc = HTMLprojectDescription.replace("%data%", project.description);
+      var formattedProjectImages = HTMLprojectImage.replace("%data%", project.images[0]);
+      $(".project-entry:last").append(formattedProjectImages);
+      if (project.images.length > 1) {
+          for (i = 1; i < project.images.length; i++) {
+              //if there are more than 1 images to add it starts adding 1 image at a time to the project
+              formattedProjectImages = HTMLprojectImage.replace("%data%", project.images[i]);
+              $(".project-entry:last").append(formattedProjectImages);
+          }
+      }
+      $(".project-entry:last").prepend(formattedProjectTitle, formattedProjectDates, formattedProjectDesc);
+  });
+
+};
+
+projects.display();
 
 
-education.certifications.forEach(function(certification) {
-    $("#education").append(HTMLcertifications);
-    var formattedCertificationTitle = HTMLonlineTitle.replace("%data%", certification.title).replace("#", certification.documentation);
-    var formattedCertificationOrg = HTMLonlineSchool.replace("%data%", certification.organization);
-    var formattedCertificationDates = HTMLonlineDates.replace("%data%", certification.dates);
-    $(".education-entry:last").append(formattedCertificationTitle, formattedCertificationOrg, formattedCertificationDates);
-});
 
-education.onlineCourses.forEach(function(online) {
-    $("#education").append(HTMLonlineClasses);
-    var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", online.title).replace("#", online.url);
-    var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", online.school);
-    var formattedOnlineDates = HTMLonlineDates.replace("%data%", online.dates);
-    $(".education-entry:last").append(formattedOnlineTitle, formattedOnlineSchool, formattedOnlineDates);
-});
 
-projects.IntroProgramming.forEach(function(project) {
-    $("#projects").append(HTMLprojectStart);
-    var formattedProjectTitle = HTMLprojectTitle.replace("%data%", project.title);
-    var formattedProjectDates = HTMLprojectDates.replace("%data%", project.dates);
-    var formattedProjectDesc = HTMLprojectDescription.replace("%data%", project.description);
-    var formattedProjectImages = HTMLprojectImage.replace("%data%", project.images[0]);
-    $(".project-entry:last").append(formattedProjectImages);
-    if (project.images.length > 1) {
-        for (i = 1; i < project.images.length; i++) {
-            //if there are more than 1 images to add it starts adding 1 image at a time to the project
-            formattedProjectImages = HTMLprojectImage.replace("%data%", project.images[i]);
-            $(".project-entry:last").append(formattedProjectImages);
-        }
-    }
-    $(".project-entry:last").prepend(formattedProjectTitle, formattedProjectDates, formattedProjectDesc);
+$("#mapDiv").append(googleMap);
+
+
+$(document).click(function(loc) {
+    var x = loc.pageX;
+    var y = loc.pageY;
+
+    logClicks(x, y);
 });
