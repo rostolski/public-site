@@ -249,7 +249,7 @@ education.display = function(){
       var formattedCertificationTitle = HTMLonlineTitle.replace("%data%", certification.title).replace("#", certification.documentation);
       var formattedCertificationOrg = HTMLonlineSchool.replace("%data%", certification.organization);
       var formattedCertificationDates = HTMLonlineDates.replace("%data%", certification.dates);
-      $(".education-entry:last").append(formattedCertificationTitle, formattedCertificationOrg, formattedCertificationDates);
+      $(".education-entry:last").append(formattedCertificationTitle+formattedCertificationOrg, formattedCertificationDates, "<br>");
   });
 
   $("#education").append(HTMLonlineClasses);
@@ -258,7 +258,7 @@ education.display = function(){
       var formattedOnlineTitle = HTMLonlineTitle.replace("%data%", online.title).replace("#", online.url);
       var formattedOnlineSchool = HTMLonlineSchool.replace("%data%", online.school);
       var formattedOnlineDates = HTMLonlineDates.replace("%data%", online.dates);
-      $(".education-entry:last").append(formattedOnlineTitle+formattedOnlineSchool, formattedOnlineDates);
+      $(".education-entry:last").append(formattedOnlineTitle+formattedOnlineSchool, formattedOnlineDates, "<br>");
   });
 
 
