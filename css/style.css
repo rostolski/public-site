@@ -28,6 +28,9 @@ h6 {
     padding: 0 5%;
 }
 
+.work-title {
+  color: black;
+}
 h1 {
     font-size: 40px;
     color: #f5a623;
@@ -72,6 +75,15 @@ h5 {
     float: left;
 }
 
+.work-date-text {
+    font-style: italic;
+    font-size: 14px;
+    color: #999;
+    line-height: 16px;
+
+}
+
+
 .location-text {
     font-style: italic;
     font-size: 14px;
@@ -90,7 +102,6 @@ b {
     color: #1199c3;
     text-decoration: none;
     margin-top: 10px;
-    display: block;
 }
 
 a {
@@ -98,6 +109,7 @@ a {
     text-decoration: none;
     margin-top: 10px;
     display: block;
+
 }
 
 .welcome-message {
