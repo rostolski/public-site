@@ -49,8 +49,8 @@ bio.display = function() {
 
   var formattedName = HTMLheaderName.replace("%data%", bio.name);
   var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-  var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
-  $("#header").prepend(formattedName, formattedRole, formattedBioPic);
+  //var formattedBioPic = HTMLbioPic.replace("%data%", bio.biopic);
+  $("#header").prepend(formattedName, formattedRole);
 
 
   var formattedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
@@ -217,7 +217,7 @@ var education = {
         "title": "Intro to Programming NanoDegree",
         "school": "Udacity",
         "dates": "Finished October 2016",
-        "url": "https://www.udacity.com/course/intro-to-programming-nanodegree--nd000"
+        "url": "files/IntroNanoDegree.pdf"
     }, {
         "title": "Full Stack Web Developer NanoDegree - In Progress",
         "school": "Udacity",
@@ -268,6 +268,8 @@ education.display = function(){
 education.display();
 
 var images = ["files/Fresh-Tomatoes-Site.jpg", "files/Movie-Code.jpg"];
+var imageTitle = ["Python Generated HTML Site", "Code snapshot"];
+var imageDescription = ["",""];
 
 var projects = {
     "projects": [{
@@ -278,6 +280,8 @@ var projects = {
             "on the Movie Website header.  On the Movie Website, upon clicking on an image a trailer will play for that " +
             "movie.",
         "images": images,
+        "imageTitle" : imageTitle,
+        "imageDescription" : imageDescription,
         "fileLink" : "movie_website/fresh_tomatoes.html"
     }]
 };
@@ -289,13 +293,13 @@ projects.display = function() {
       var formattedProjectTitle = HTMLprojectTitle.replace("%data%", project.title).replace("#", project.fileLink);
       var formattedProjectDates = HTMLprojectDates.replace("%data%", project.dates);
       var formattedProjectDesc = HTMLprojectDescription.replace("%data%", project.description);
-      var formattedProjectImages = HTMLprojectImage.replace("%data%", project.images[0]);
-      $(".project-entry:last").append(formattedProjectImages);
-      if (project.images.length > 1) {
-          for (i = 1; i < project.images.length; i++) {
+      if (project.images.length > 0) {
+          for (i = 0; i < project.images.length; i++) {
               //if there are more than 1 images to add it starts adding 1 image at a time to the project
-              formattedProjectImages = HTMLprojectImage.replace("%data%", project.images[i]);
+              formattedProjectImages = HTMLprojectImage.replace("%data%", project.images[i]).replace("%num%", i);
               $(".project-entry:last").append(formattedProjectImages);
+              formattedImageExpand = HTMLprojectImageExpand.replace("%num%", i).replace("%title%", project.imageTitle[i]).replace("%image%", project.images[i]).replace("%description%", project.imageDescription[i]);
+              $("#imagepop").append(formattedImageExpand);
           }
       }
       $(".project-entry:last").prepend(formattedProjectTitle, formattedProjectDates, formattedProjectDesc);
@@ -306,9 +310,9 @@ projects.display = function() {
 projects.display();
 
 
-$("main").append(internationalizeButton);
+//$("main").append(internationalizeButton);
 
-$("#mapDiv").append(googleMap);
+//$("#mapDiv").append(googleMap);
 
 
 $(document).click(function(loc) {
