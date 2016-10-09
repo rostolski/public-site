@@ -41,7 +41,24 @@ var HTMLprojectStart = '<div class="project-entry"></div>';
 var HTMLprojectTitle = '<a href="#">%data%</a>';
 var HTMLprojectDates = '<div class="date-text">%data%</div>';
 var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img src="%data%" class="projImg">';
+var HTMLprojectImage = '<img src="%data%" class="projImg" data-toggle="modal" data-target="#project%num%">';
+
+var HTMLprojectImageExpand = '<div class="modal fade" id="project%num%" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'+
+        '<div class="modal-dialog">'+
+            '<div class="modal-content">'+
+                '<div class="modal-header">'+
+                    '<h4 class="modal-title" id="myModalLabel">%title%</h4>'+
+                '</div>'+
+                '<div class="modal-body">'+
+                    '<img class="img-responsive" src="%image%">'+
+                    '%description%'+
+                '</div>'+
+                '<div class="modal-footer">'+
+                    '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+                '</div>'+
+            '</div>'+
+        '</div>'+
+    '</div>';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
 var HTMLschoolName = '<a href="#">%data%';
